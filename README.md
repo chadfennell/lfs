@@ -15,8 +15,9 @@ A small demo app that performs literal string searches against large compressed 
 ## Installation
 
 ```bash
-git clone git@github.com:chadfennell/lfs.git
-cd lff
+git clone https://github.com/chadfennell/lfs.git
+cd lfs
+mix deps.get
 mix compile
 ```
 
@@ -33,6 +34,14 @@ Run the search:
 ```bash
 mix lfs.search part-00001.gz "Mexican American|Mexico|El Salvador|Hispanic|Chicano|All Souls"
 ```
-
 * The first argument is the data directory file name to be searched.
 * The second argument is a pipe `|` delimited set of terms to search (searches are literal string matches and case insensitive)
+* Matches are added to the `data/matches.json` file.
+
+Get a running count of records added to the `matches.json` file:
+
+```bash
+watch "cat data/matches.json | wc -l"
+```
+
+Open a new terminal and run `htop` to see Elixir taking advantage of multiple cores.
