@@ -8,7 +8,7 @@ defmodule Lfs do
         save(record)
       end
     end)
-    |> Enum.to_list()
+    |> Flow.run()
   end
 
   def contains?(record, patterns) do
