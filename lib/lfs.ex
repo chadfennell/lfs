@@ -1,8 +1,8 @@
 defmodule Lfs do
   def search(filename, patterns) do
     File.stream!("#{data_dir()}/#{filename}", [:compressed])
-    |> Flow.from_enumerable(max_demand: 200)
-    |> Flow.partition(max_demand: 20, stages: 20)
+    |> Flow.from_enumerable(max_demand: 100)
+    |> Flow.partition(max_demand: 5, stages: 20)
     |> Flow.map(fn record ->
       if contains?(record, patterns) do
         save(record)
